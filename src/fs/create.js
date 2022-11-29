@@ -1,10 +1,10 @@
 import { writeFile } from "node:fs/promises";
 import { Buffer } from "node:buffer";
 
-const create = async () => {
+const create = async (filePath, content) => {
   try {
-    const text = new Uint8Array(Buffer.from("I am fresh and young"));
-    await writeFile(`./files/fresh.txt`, text, { flag: "wx" });
+    const text = new Uint8Array(Buffer.from(content));
+    await writeFile(filePath, text, { flag: "wx" });
   } catch (err) {
     if (err.code === "EEXIST") {
       throw new Error("FS operation failed");
@@ -13,7 +13,7 @@ const create = async () => {
   }
 };
 try {
-  await create();
+  await create("./files/fresh.txt", "I am fresh and young");
 } catch (err) {
   console.log(err);
 }

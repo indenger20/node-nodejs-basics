@@ -1,8 +1,8 @@
 import { rm } from "node:fs/promises";
 
-const remove = async () => {
+const remove = async (filePath) => {
   try {
-    await rm("./files/fileToRemove.txt");
+    await rm(filePath);
   } catch (err) {
     if (err.code === "ENOENT") {
       throw new Error("FS operation failed");
@@ -12,7 +12,7 @@ const remove = async () => {
 };
 
 try {
-  await remove();
+  await remove("./files/fileToRemove.txt");
 } catch (err) {
   console.log(err);
 }

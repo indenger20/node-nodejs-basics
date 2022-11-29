@@ -11,19 +11,13 @@ const isFileExisting = async (path) => {
   }
 };
 
-const rename = async () => {
-  const folderPath = "./files";
-  const newFileName = "properFilename.md";
-
+const rename = async (basePath, newPath) => {
   try {
-    if (await isFileExisting(`${folderPath}/${newFileName}`)) {
+    if (await isFileExisting(newPath)) {
       throw new Error(errorMessage);
     }
 
-    await fsRename(
-      `${folderPath}/wrongFilename.txt`,
-      `${folderPath}/${newFileName}`
-    );
+    await fsRename(basePath, newPath);
   } catch (err) {
     if (err.code === "ENOENT") {
       throw new Error(errorMessage);
@@ -32,7 +26,7 @@ const rename = async () => {
   }
 };
 try {
-  await rename();
+  await rename("./files/wrongFilename.txt", "./files/properFilename.md");
 } catch (err) {
   console.log(err);
 }

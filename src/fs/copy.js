@@ -1,8 +1,8 @@
 import { cp } from "node:fs/promises";
 
-const copy = async () => {
+const copy = async (basePath, newPath) => {
   try {
-    await cp("./files", "./files_copy", {
+    await cp(basePath, newPath, {
       recursive: true,
       errorOnExist: true,
       force: false,
@@ -16,7 +16,7 @@ const copy = async () => {
 };
 
 try {
-  await copy();
+  await copy('./files', './files_copy');
 } catch (err) {
   console.log(err);
 }
