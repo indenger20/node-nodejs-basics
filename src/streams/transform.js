@@ -1,5 +1,18 @@
+import { Transform } from "node:stream";
+
 const transform = async () => {
-    // Write your code here 
+  const revereString = new Transform({
+    transform(chunk, encoding, callback) {
+      this.push(String(chunk).split("").reverse().join('') + '\n');
+      callback();
+    },
+  });
+
+  process.stdin.pipe(revereString).pipe(process.stdout);
 };
 
-await transform();
+try {
+  await transform();
+} catch (err) {
+  console.error(err);
+}
