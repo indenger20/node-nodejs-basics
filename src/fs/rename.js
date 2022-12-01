@@ -1,4 +1,5 @@
 import { access, constants, rename as fsRename } from "node:fs/promises";
+import { getDirAndFileName } from "../helpers/index.mjs";
 
 const errorMessage = "FS operation failed";
 
@@ -26,7 +27,11 @@ const rename = async (basePath, newPath) => {
   }
 };
 try {
-  await rename("./files/wrongFilename.txt", "./files/properFilename.md");
+  const { __dirname } = getDirAndFileName(import.meta.url);
+  await rename(
+    `${__dirname}/files/wrongFilename.txt`,
+    `${__dirname}/files/properFilename.md`
+  );
 } catch (err) {
-  console.log(err);
+  console.error(err);
 }

@@ -1,4 +1,5 @@
 import { rm } from "node:fs/promises";
+import { getDirAndFileName } from "../helpers/index.mjs";
 
 const remove = async (filePath) => {
   try {
@@ -12,7 +13,8 @@ const remove = async (filePath) => {
 };
 
 try {
-  await remove("./files/fileToRemove.txt");
+  const { __dirname } = getDirAndFileName(import.meta.url);
+  await remove(`${__dirname}/files/fileToRemove.txt`);
 } catch (err) {
-  console.log(err);
+  console.error(err);
 }

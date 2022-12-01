@@ -1,4 +1,6 @@
 import { readFile } from "node:fs/promises";
+import { getDirAndFileName } from "../helpers/index.mjs";
+
 const read = async (fileName) => {
   try {
     const file = await readFile(fileName, {
@@ -14,7 +16,8 @@ const read = async (fileName) => {
 };
 
 try {
-  await read('./files/fileToRead.txt');
+  const { __dirname } = getDirAndFileName(import.meta.url);
+  await read(`${__dirname}/files/fileToRead.txt`);
 } catch (err) {
-  console.log(err);
+  console.error(err);
 }

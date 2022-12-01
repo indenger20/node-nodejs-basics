@@ -1,4 +1,5 @@
 import { cp } from "node:fs/promises";
+import { getDirAndFileName } from '../helpers/index.mjs';
 
 const copy = async (basePath, newPath) => {
   try {
@@ -16,7 +17,8 @@ const copy = async (basePath, newPath) => {
 };
 
 try {
-  await copy('./files', './files_copy');
+  const { __dirname } = getDirAndFileName(import.meta.url);
+  await copy(`${__dirname}/files`, `${__dirname}/files_copy`);
 } catch (err) {
-  console.log(err);
+  console.error(err);
 }

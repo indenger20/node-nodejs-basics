@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { Buffer } from "node:buffer";
+import { getDirAndFileName } from '../helpers/index.mjs';
 
 const create = async (filePath, content) => {
   try {
@@ -13,7 +14,8 @@ const create = async (filePath, content) => {
   }
 };
 try {
-  await create("./files/fresh.txt", "I am fresh and young");
+  const { __dirname } = getDirAndFileName(import.meta.url);
+  await create(`${__dirname}/files/fresh.txt`, "I am fresh and young");
 } catch (err) {
-  console.log(err);
+  console.error(err);
 }
