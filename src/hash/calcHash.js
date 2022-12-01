@@ -1,5 +1,16 @@
-const calculateHash = async () => {
-    // Write your code here 
+import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { getDirAndFileName } from "../helpers/index.mjs";
+
+const calculateHash = async (path) => {
+  const fileBuffer = await readFile(path);
+  const hash = createHash("sha256").update(fileBuffer).digest("hex");
+  console.log(hash);
 };
 
-await calculateHash();
+try {
+  const { __dirname } = getDirAndFileName(import.meta.url);
+  await calculateHash(`${__dirname}/files/fileToCalculateHashFor.txt`);
+} catch (err) {
+  console.error(err);
+}
