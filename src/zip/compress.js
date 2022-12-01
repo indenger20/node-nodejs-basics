@@ -4,9 +4,9 @@ import { pipeline } from "node:stream";
 import { createReadStream, createWriteStream } from "node:fs";
 import { getDirAndFileName } from "../helpers/index.mjs";
 
-const pipe = promisify(pipeline);
 
 const compress = async (input, output) => {
+  const pipe = promisify(pipeline);
   const gzip = createGzip();
   const inputStream = createReadStream(input);
   const outputStream = createWriteStream(output);
