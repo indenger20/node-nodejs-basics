@@ -12,6 +12,7 @@ const sendResult = () => {
       const result = nthFibonacci(i);
       parentPort.postMessage(result);
     }
+    parentPort.close();
   });
 };
 
