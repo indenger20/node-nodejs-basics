@@ -16,4 +16,4 @@ const spawnChildProcess = async (args = []) => {
   });
 };
 
-spawnChildProcess(["someArg1", ["someArg2"]]);
+spawnChildProcess(["someArg1", "someArg2"]);
