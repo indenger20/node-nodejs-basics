@@ -5,7 +5,7 @@ const errorMessage = "FS operation failed";
 
 const isFileExisting = async (path) => {
   try {
-    await access(path, constants.R_OK);
+    await access(path, constants.F_OK);
     return true;
   } catch {
     return false;
